@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherTime</title>
+    <link rel="stylesheet" href="s.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="Enter city" id="city-input">
+            <button id="search-button"><img src="images/search.png" alt="search button"></button>
+        </div>
+        <div class="wea">
+            <img src="images/clouds.png" alt="weather type" class="wicon" id="wicon">
+            <h2 class="temp" id="temp">22°C</h2>
+            <h3 class="city" id="city">City</h3>
+            <div class="det">
+                <div class="col">
+                    <img src="images/humidity.png" alt="">
+                    <p class="hum" id="humidity">50%</p>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png" alt="">
+                    <p class="wind" id="wind-speed">5 m/s</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Include Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const apiKey = "9d3af07884cffec8b62d02d8af614c25";
+
+        const weatherIcon = document.getElementById("wicon")
+        const searchButton = document.getElementById("search-button");
+        const cityInput = document.getElementById("city-input");
+        const tempElement = document.getElementById("temp");
+        const cityElement = document.getElementById("city");
+        const humidityElement = document.getElementById("humidity");
+        const windSpeedElement = document.getElementById("wind-speed");        
+        async function checkWeather(city) {
+            try {
+                const apiURL = `https://api.openweathermap.org/data/2.5/weather?&units=metric&q=${city}&appid=${apiKey}`;
+                const response = await axios.get(apiURL);
+                const data = response.data;                
+                tempElement.textContent = `${data.main.temp}°C`;
+                cityElement.textContent = data.name;
+                humidityElement.textContent = `${data.main.humidity}%`;               
+                windSpeedElement.textContent = `${data.wind.speed} m/s`;
+                if(data.weather[0].main =="Clouds"){
+                 weatherIcon.src ="images/clouds.png"
+            } else if(data.weather[0].main =="Clear"){
+                 weatherIcon.src ="images/clear.png"
+            } else if(data.weather[0].main =="Drizzle"){
+                 weatherIcon.src ="images/drizzle.png"
+            } else if(data.weather[0].main =="Mist"){
+                 weatherIcon.src ="images/mist.png"
+            } else if(data.weather[0].main =="Rain"){
+                 weatherIcon.src ="images/Rain.png"
+            } else if(data.weather[0].main =="Snow"){
+                 weatherIcon.src ="images/snow.png"
+            }
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+                alert("City not found. Please try again.");
+            }
+        }        
+        searchButton.addEventListener("click", () => {
+            const city = cityInput.value.trim();
+            if (city) {
+                checkWeather(city);
+            } else {
+                alert("Please enter a city name.");
+            }
+        });
+    </script>
+</body>
+</html>
