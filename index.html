@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherTime</title>
-    <link rel="stylesheet" href="s.css">
+    <link rel="stylesheet" href="/css/s.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
@@ -13,19 +13,21 @@
     <div class="card">
         <div class="search">
             <input type="text" placeholder="Enter city" id="city-input">
-            <button id="search-button"><img src="images/search.png" alt="search button"></button>
+            <button id="search-button">
+                <img src="/images/search.png" alt="search button">
+            </button>
         </div>
         <div class="wea">
-            <img src="images/clouds.png" alt="weather type" class="wicon" id="wicon">
+            <img src="/images/clouds.png" alt="weather type" class="wicon" id="wicon">
             <h2 class="temp" id="temp">22°C</h2>
             <h3 class="city" id="city">City</h3>
             <div class="det">
                 <div class="col">
-                    <img src="images/humidity.png" alt="">
+                    <img src="/images/humidity.png" alt="">
                     <p class="hum" id="humidity">50%</p>
                 </div>
                 <div class="col">
-                    <img src="images/wind.png" alt="">
+                    <img src="/images/wind.png" alt="">
                     <p class="wind" id="wind-speed">5 m/s</p>
                 </div>
             </div>
@@ -34,6 +36,6 @@
 
     <!-- Include Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="index.js" defer></script> <!-- Added defer to ensure the script loads after DOM -->
+    <script src="/js/index.js" defer></script>
 </body>
 </html>
